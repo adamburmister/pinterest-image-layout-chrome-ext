@@ -72,6 +72,7 @@
     "classnames": "^2.2.5",
     "flexboxgrid": "^6.3.0",
     "lodash.find": "^4.4.0",
+    "lodash.remove": "^4.5.0",
     "react": "^15.0.2",
     "react-avatar-editor": "^4.0.0",
     "react-dock": "^0.2.3",
