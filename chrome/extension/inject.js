@@ -4,6 +4,7 @@ import Dock from 'react-dock';
 import Root from '../../app/containers/Root';
 import createStore from '../../app/store/configureStore';
 import { addImage } from '../../app/actions/images';
+import uuid from 'uuid';
 
 let handleExtensionClick = () => {};
 
@@ -13,13 +14,14 @@ class InjectApp extends Component {
 
     this.store = createStore({ images: [] });
     this.state = { isVisible: false };
+
     handleExtensionClick = () => this.buttonOnClick();
   }
 
   populateImagesIntoStore = () => {
     document.querySelectorAll('img').forEach((img) => {
       this.store.dispatch(addImage({
-        id: img.src,
+        id: uuid.v1(),
         src: img.src,
         width: img.width,
         height: img.height,
@@ -34,30 +36,15 @@ class InjectApp extends Component {
 
   render() {
     return (
-      <div style={{ background: 'rgba(0,0,0,0.8)' }}>
-        <button onClick={this.buttonOnClick} style={{ position: 'absolute', left: 0, top: 0 }}>
-          DEBUG: Show Pinterest Layout
-        </button>
-        <Dock
-          position="bottom"
-          dimMode="transparent"
-          defaultSize={1}
-          isVisible={this.state.isVisible}
-          dockStyle={{ background: 'rgba(0,0,0,0.8)' }}
-        >
-          <button onClick={this.buttonOnClick}>DEBUG: Close dock</button>
-          <Root store={this.store} />,
-          {/*<iframe
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-            frameBorder={0}
-            allowTransparency="true"
-            src={chrome.extension.getURL('inject.html')}
-          />*/}
-        </Dock>
-      </div>
+      <Dock
+        position="bottom"
+        dimMode="transparent"
+        defaultSize={1}
+        isVisible={this.state.isVisible}
+        dockStyle={{ background: 'rgba(0,0,0,0.8)' }}
+      >
+        <Root store={this.store} />,
+      </Dock>
     );
   }
 }
