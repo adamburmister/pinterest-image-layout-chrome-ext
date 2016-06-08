@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import TodoItem from './TodoItem';
 import Footer from './Footer';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
+// import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
 import style from './MainSection.css';
 
 const TODO_FILTERS = {
-  [SHOW_ALL]: () => true,
-  [SHOW_ACTIVE]: todo => !todo.completed,
-  [SHOW_COMPLETED]: todo => todo.completed
+  // [SHOW_ALL]: () => true,
+  // [SHOW_ACTIVE]: todo => !todo.completed,
+  // [SHOW_COMPLETED]: todo => todo.completed
 };
 
 export default class MainSection extends Component {
@@ -19,7 +19,7 @@ export default class MainSection extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = { filter: SHOW_ALL };
+    // this.state = { filter: SHOW_ALL };
   }
 
   handleClearCompleted = () => {
@@ -67,9 +67,9 @@ export default class MainSection extends Component {
 
   render() {
     const { todos, actions } = this.props;
-    const { filter } = this.state;
+    // const { filter } = this.state;
 
-    const filteredTodos = todos.filter(TODO_FILTERS[filter]);
+    const filteredTodos = [];// todos.filter(TODO_FILTERS[filter]);
     const completedCount = todos.reduce(
       (count, todo) => (todo.completed ? count + 1 : count),
       0

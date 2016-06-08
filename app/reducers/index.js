@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import todos from './todos';
+import images from './images';
 
 export default combineReducers({
-  todos
+  images
 });
