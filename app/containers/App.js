@@ -26,15 +26,13 @@ export default class App extends Component {
 
     return (
       <div className={style.container}>
-        <div className='row center-xs'>
-            <div className='col-xs-6'>
-            {
-              images.map((img) => <div key={img.id}>{ img.src }</div>)
-            }
+        {
+          images.map((img) =>
+            <div key={img.id}>
+              <img src={img.src} width={80} />
             </div>
-        </div>
-        {/*<Header addTodo={actions.addTodo} />*/}
-        {/*<MainSection images={images} actions={actions} />*/}
+          )
+        }
       </div>
     );
   }
