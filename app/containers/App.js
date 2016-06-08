@@ -26,10 +26,10 @@ export default class App extends Component {
 
     return (
       <div className={style.container}>
-        <div class="row center-xs">
-            <div class="col-xs-6">
-                <div class="box">
-                    start
+        <div className='row center-xs'>
+            <div className='col-xs-6'>
+                <div className='box'>
+                    Hello world
                 </div>
             </div>
         </div>

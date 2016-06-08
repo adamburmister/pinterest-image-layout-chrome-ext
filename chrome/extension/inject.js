@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Dock from 'react-dock';
+import Root from '../../app/containers/Root';
+import createStore from '../../app/store/configureStore';
 
 class InjectApp extends Component {
   constructor(props) {
     super(props);
+    this.store = createStore({})
     this.state = { isVisible: false };
   }
 
@@ -26,6 +29,7 @@ class InjectApp extends Component {
           dockStyle={{ background: 'rgba(0,0,0,0.8)' }}
         >
           <button onClick={this.buttonOnClick}>DEBUG: Close dock</button>
+          <Root store={this.store} />,
           {/*<iframe
             style={{
               width: '100%',
