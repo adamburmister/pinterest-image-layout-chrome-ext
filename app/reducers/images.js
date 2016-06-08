@@ -3,7 +3,8 @@ import remove from 'lodash.remove';
 
 const initialState = [];
 
-const updateImageInState = (state, id, changes) => {
+// Modify an image in the state, merging in changes
+const merge = (state, id, changes) => {
   const target = remove(state, { id })[0];
   return [...state, { ...target, ...changes }];
 };
@@ -13,10 +14,10 @@ const actionsMap = {
     return [...state, image];
   },
   [ActionTypes.SELECT_IMAGE](state, { id }) {
-    return updateImageInState(state, id, { isSelected: true })
+    return merge(state, id, { isSelected: true })
   },
   [ActionTypes.DESELECT_IMAGE](state, { id }) {
-    return updateImageInState(state, id, { isSelected: false })
+    return merge(state, id, { isSelected: false })
   }
 };
 
