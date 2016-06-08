@@ -14,17 +14,19 @@ class InjectApp extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.buttonOnClick}>
-          Open TodoApp
+      <div style={{ background: 'rgba(0,0,0,0.8)' }}>
+        <button onClick={this.buttonOnClick} style={{ position: 'absolute', left: 0, top: 0 }}>
+          DEBUG: Show Pinterest Layout
         </button>
         <Dock
-          position="right"
+          position="bottom"
           dimMode="transparent"
-          defaultSize={0.4}
+          defaultSize={1}
           isVisible={this.state.isVisible}
+          dockStyle={{ background: 'rgba(0,0,0,0.8)' }}
         >
-          <iframe
+          <button onClick={this.buttonOnClick}>DEBUG: Close dock</button>
+          {/*<iframe
             style={{
               width: '100%',
               height: '100%',
@@ -32,7 +34,7 @@ class InjectApp extends Component {
             frameBorder={0}
             allowTransparency="true"
             src={chrome.extension.getURL('inject.html')}
-          />
+          />*/}
         </Dock>
       </div>
     );
@@ -41,7 +43,7 @@ class InjectApp extends Component {
 
 window.addEventListener('load', () => {
   const injectDOM = document.createElement('div');
-  injectDOM.className = 'inject-react-example';
+  injectDOM.className = 'pinterest-layout-ext';
   injectDOM.style.textAlign = 'center';
   document.body.appendChild(injectDOM);
   render(<InjectApp />, injectDOM);

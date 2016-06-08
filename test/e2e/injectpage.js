@@ -23,7 +23,7 @@ describe('inject page (in github.com)', function test() {
 
   it('should render inject app', async () => {
     await driver.wait(
-      () => driver.findElements(webdriver.By.className('inject-react-example'))
+      () => driver.findElements(webdriver.By.className('pinterest-layout-ext'))
         .then(elems => elems.length > 0),
       10000,
       'Inject app not found'
@@ -32,7 +32,7 @@ describe('inject page (in github.com)', function test() {
 
   it('should find `Open TodoApp` button', async () => {
     await driver.wait(
-      () => driver.findElements(webdriver.By.css('.inject-react-example button'))
+      () => driver.findElements(webdriver.By.css('.pinterest-layout-ext button'))
         .then(elems => elems.length > 0),
       10000,
       'Inject app `Open TodoApp` button not found'
@@ -40,10 +40,10 @@ describe('inject page (in github.com)', function test() {
   });
 
   it('should find iframe', async () => {
-    driver.findElement(webdriver.By.css('.inject-react-example button')).click();
+    driver.findElement(webdriver.By.css('.pinterest-layout-ext button')).click();
     await delay(1000);
     await driver.wait(
-      () => driver.findElements(webdriver.By.css('.inject-react-example iframe'))
+      () => driver.findElements(webdriver.By.css('.pinterest-layout-ext iframe'))
         .then(elems => elems.length > 0),
       10000,
       'Inject app iframe not found'
