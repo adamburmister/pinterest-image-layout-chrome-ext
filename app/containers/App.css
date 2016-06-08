@@ -35,6 +35,19 @@
   padding-left: 2rem;
 }
 
+.pinPanel {
+  width: 400px;
+  background: #ccc;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.imagesPanel {
+  margin-right: 400px;
+}
+
 .row {
   box-sizing: border-box;
   display: -webkit-box;

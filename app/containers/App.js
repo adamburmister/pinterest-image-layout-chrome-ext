@@ -26,13 +26,20 @@ export default class App extends Component {
 
     return (
       <div className={style.container}>
-        {
-          images.map((img) =>
-            <div key={img.id}>
-              <img src={img.src} width={80} />
-            </div>
-          )
-        }
+        <div className={style.imagesPanel}>
+          Images components
+          {
+            images.map((img) =>
+              <div key={img.id}>
+                <img src={img.src} width={80} />
+              </div>
+            )
+          }
+
+        </div>
+        <div className={style.pinPanel}>
+          Pin editor panel
+        </div>
       </div>
     );
   }
