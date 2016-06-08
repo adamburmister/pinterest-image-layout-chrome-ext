@@ -3,16 +3,33 @@ import { render } from 'react-dom';
 import Dock from 'react-dock';
 import Root from '../../app/containers/Root';
 import createStore from '../../app/store/configureStore';
+import { addImage } from '../../app/actions/images';
+
+let handleExtensionClick = () => {};
 
 class InjectApp extends Component {
   constructor(props) {
     super(props);
-    this.store = createStore({})
+
+    this.store = createStore({ images: [] });
     this.state = { isVisible: false };
+    handleExtensionClick = () => this.buttonOnClick();
+  }
+
+  populateImagesIntoStore = () => {
+    document.querySelectorAll('img').forEach((img) => {
+      this.store.dispatch(addImage({
+        id: img.src,
+        src: img.src,
+        width: img.width,
+        height: img.height,
+      }));
+    });
   }
 
   buttonOnClick = () => {
     this.setState({ isVisible: !this.state.isVisible });
+    this.populateImagesIntoStore();
   };
 
   render() {
@@ -55,9 +72,7 @@ window.addEventListener('load', () => {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    if (request.greeting == "hello")
-      sendResponse({farewell: "goodbye"});
+    if(request.toggle) {
+      handleExtensionClick();
+    }
   });

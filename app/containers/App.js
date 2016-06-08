@@ -22,15 +22,15 @@ export default class App extends Component {
   };
 
   render() {
-    // const { images, actions } = this.props;
+    const { images } = this.props;
 
     return (
       <div className={style.container}>
         <div className='row center-xs'>
             <div className='col-xs-6'>
-                <div className='box'>
-                    Hello world
-                </div>
+            {
+              images.map((img) => <div key={img.id}>{ img.src }</div>)
+            }
             </div>
         </div>
         {/*<Header addTodo={actions.addTodo} />*/}
