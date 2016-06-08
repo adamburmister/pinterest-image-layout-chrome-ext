@@ -16,7 +16,7 @@ class InjectApp extends Component {
     return (
       <div style={{ background: 'rgba(0,0,0,0.8)' }}>
         <button onClick={this.buttonOnClick} style={{ position: 'absolute', left: 0, top: 0 }}>
-          Open TodoApp
+          DEBUG: Show Pinterest Layout
         </button>
         <Dock
           position="bottom"
