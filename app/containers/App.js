@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import Header from '../components/Header';
+import PinLayout from '../components/PinLayout';
 // import MainSection from '../components/MainSection';
 import * as ImageActions from '../actions/images';
 import style from './App.css';
@@ -38,7 +38,7 @@ export default class App extends Component {
 
         </div>
         <div className={style.pinPanel}>
-          Pin editor panel
+          <PinLayout image={images} />
         </div>
       </div>
     );
