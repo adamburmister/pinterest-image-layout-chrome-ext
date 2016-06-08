@@ -1,4 +1,4 @@
-.normal {
+.container {
   background: #fff;
   margin: 200px 0 40px 0;
   position: relative;
@@ -6,25 +6,25 @@
               0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-.normal input::-webkit-input-placeholder {
+.container input::-webkit-input-placeholder {
   font-style: italic;
   font-weight: 300;
   color: #e6e6e6;
 }
 
-.normal input::-moz-placeholder {
+.container input::-moz-placeholder {
   font-style: italic;
   font-weight: 300;
   color: #e6e6e6;
 }
 
-.normal input::input-placeholder {
+.container input::input-placeholder {
   font-style: italic;
   font-weight: 300;
   color: #e6e6e6;
 }
 
-.normal h1 {
+.container h1 {
   position: absolute;
   top: -155px;
   width: 100%;
