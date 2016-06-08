@@ -13,6 +13,9 @@ const actionsMap = {
   [ActionTypes.ADD_IMAGE](state, { image }) {
     return [...state, image];
   },
+  [ActionTypes.REPLACE_IMAGES](state, { images }) {
+    return images;
+  },
   [ActionTypes.SELECT_IMAGE](state, { id }) {
     return merge(state, id, { isSelected: true })
   },
@@ -21,7 +24,7 @@ const actionsMap = {
   }
 };
 
-export default function images(state = initialState, action) {
+export default function imagesReducer(state = initialState, action) {
   const reduceFn = actionsMap[action.type];
   if (!reduceFn) return state;
   return reduceFn(state, action);

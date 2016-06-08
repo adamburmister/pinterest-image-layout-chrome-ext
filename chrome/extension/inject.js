@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import Dock from 'react-dock';
 import Root from '../../app/containers/Root';
 import createStore from '../../app/store/configureStore';
-import { addImage } from '../../app/actions/images';
+import { replaceImages } from '../../app/actions/images';
 import uuid from 'uuid';
 
 let handleExtensionClick = () => {};
@@ -19,14 +19,16 @@ class InjectApp extends Component {
   }
 
   populateImagesIntoStore = () => {
+    const images = [];
     document.querySelectorAll('img').forEach((img) => {
-      this.store.dispatch(addImage({
+      images.push({
         id: uuid.v1(),
         src: img.src,
         width: img.width,
         height: img.height,
-      }));
+      });
     });
+    this.store.dispatch(replaceImages(images));
   }
 
   buttonOnClick = () => {
