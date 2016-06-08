@@ -38,5 +38,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   const result = await isInjected(tabId);
   if (chrome.runtime.lastError || result[0]) return;
 
-  loadScript('inject', tabId, () => console.log('load inject bundle success!'));
+  loadScript('inject', tabId, () => {
+    console.log('load inject bundle success!')
+  });
 });

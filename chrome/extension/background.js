@@ -27,5 +27,14 @@ promisifyAll(chrome.storage, [
   'local',
 ]);
 
+chrome.browserAction.onClicked.addListener(function(tab) {
+  // Send a message to the active tab
+  chrome.tabs.query({ active: true, currentWindow: true }, function cb(tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
+    console.log('... sent message');
+  });
+});
+
 require('./background/contextMenus');
 require('./background/inject');
