@@ -3,31 +3,20 @@ import remove from 'lodash.remove';
 
 const initialState = [];
 
-const removeImageById = (state, id) => remove(state, { id })[0];
+const updateImageInState = (state, id, changes) => {
+  const target = remove(state, { id })[0];
+  return [...state, { ...target, ...changes }];
+};
 
 const actionsMap = {
   [ActionTypes.ADD_IMAGE](state, { image }) {
     return [...state, image];
   },
   [ActionTypes.SELECT_IMAGE](state, { id }) {
-    const target = removeImageById(state, id)
-    return [
-      ...state,
-      {
-        ...target,
-        isSelected: true
-      }
-    ];
+    return updateImageInState(state, id, { isSelected: true })
   },
   [ActionTypes.DESELECT_IMAGE](state, { id }) {
-    const target = removeImageById(state, id)
-    return [
-      ...state,
-      {
-        ...target,
-        isSelected: false
-      }
-    ];
+    return updateImageInState(state, id, { isSelected: false })
   }
 };
 
