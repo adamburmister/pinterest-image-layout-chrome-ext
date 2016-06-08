@@ -1,28 +1,30 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import find from 'lodash.find';
+import remove from 'lodash.remove';
 
 const initialState = [];
 
-export const getImageById = (state, id) => find(state, { id });
+const removeImageById = (state, id) => remove(state, { id })[0];
 
 const actionsMap = {
   [ActionTypes.ADD_IMAGE](state, { image }) {
     return [...state, image];
   },
   [ActionTypes.SELECT_IMAGE](state, { id }) {
+    const target = removeImageById(state, id)
     return [
       ...state,
       {
-        ...getImageById(state, id),
+        ...target,
         isSelected: true
       }
     ];
   },
   [ActionTypes.DESELECT_IMAGE](state, { id }) {
+    const target = removeImageById(state, id)
     return [
       ...state,
       {
-        ...getImageById(state, id),
+        ...target,
         isSelected: false
       }
     ];
