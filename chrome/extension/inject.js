@@ -15,7 +15,7 @@ class InjectApp extends Component {
   render() {
     return (
       <div style={{ background: 'rgba(0,0,0,0.8)' }}>
-        <button onClick={this.buttonOnClick}>
+        <button onClick={this.buttonOnClick} style={{ position: 'absolute', left: 0, top: 0 }}>
           Open TodoApp
         </button>
         <Dock
@@ -23,9 +23,10 @@ class InjectApp extends Component {
           dimMode="transparent"
           defaultSize={1}
           isVisible={this.state.isVisible}
+          dockStyle={{ background: 'rgba(0,0,0,0.8)' }}
         >
           <button onClick={this.buttonOnClick}>DEBUG: Close dock</button>
-          <iframe
+          {/*<iframe
             style={{
               width: '100%',
               height: '100%',
@@ -33,7 +34,7 @@ class InjectApp extends Component {
             frameBorder={0}
             allowTransparency="true"
             src={chrome.extension.getURL('inject.html')}
-          />
+          />*/}
         </Dock>
       </div>
     );
