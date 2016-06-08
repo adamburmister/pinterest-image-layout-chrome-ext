@@ -13,8 +13,8 @@ const actionsMap = {
     return [
       ...state,
       {
-        ...getImageById(id),
-        selected: true
+        ...getImageById(state, id),
+        isSelected: true
       }
     ];
   },
@@ -22,8 +22,8 @@ const actionsMap = {
     return [
       ...state,
       {
-        ...getImageById(id),
-        selected: false
+        ...getImageById(state, id),
+        isSelected: false
       }
     ];
   }

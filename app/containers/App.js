@@ -26,7 +26,13 @@ export default class App extends Component {
 
     return (
       <div className={style.container}>
-        <p>Hello Team Kickass</p>
+        <div class="row center-xs">
+            <div class="col-xs-6">
+                <div class="box">
+                    start
+                </div>
+            </div>
+        </div>
         {/*<Header addTodo={actions.addTodo} />*/}
         {/*<MainSection images={images} actions={actions} />*/}
       </div>
