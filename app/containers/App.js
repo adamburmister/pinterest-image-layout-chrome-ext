@@ -5,6 +5,7 @@ import PinLayout from '../components/PinLayout';
 // import MainSection from '../components/MainSection';
 import * as ImageActions from '../actions/images';
 import style from './App.css';
+import ImageLayout from '../components/ImageLayout';
 
 @connect(
   state => ({
@@ -28,13 +29,8 @@ export default class App extends Component {
       <div className={style.container}>
         <div className={style.imagesPanel}>
           Images components
-          {
-            images.map((img) =>
-              <div key={img.id}>
-                <img src={img.src} width={80} />
-              </div>
-            )
-          }
+
+          <ImageLayout items={ images } columnWidth={200} columns={3} gutter={8} />
 
         </div>
         <div className={style.pinPanel}>

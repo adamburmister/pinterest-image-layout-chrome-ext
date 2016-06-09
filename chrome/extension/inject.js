@@ -23,7 +23,7 @@ class InjectApp extends Component {
     document.querySelectorAll('img').forEach((img) => {
       images.push({
         id: uuid.v1(),
-        src: img.src,
+        url: img.src,
         width: img.width,
         height: img.height,
       });
