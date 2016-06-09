@@ -7,6 +7,7 @@ import * as ImageActions from '../actions/images';
 import style from './App.css';
 import ImageLayout from '../components/ImageLayout';
 
+
 @connect(
   state => ({
     images: state.images
