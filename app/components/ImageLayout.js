@@ -32,6 +32,13 @@ class ImageLayout extends Component {
   }
 
     /*
+     * Reset column heights to zero on update
+     */
+  componentWillUpdate(props) {
+    this.columnHeights = Array.from({ length: props.columns }, () => 0);
+  }
+
+    /*
      * Get the shortest column in the list of columns heights
      */
   getShortestColumn() {
