@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const ToggleableImage = ({ image, onClick }) => (
   <div className={classNames(style.ToggleableImage, { [style.checked]: image.isSelected })}>
-    <div className={style.checkbox} />
+    <div className={style.checkbox}>✔</div>
     <img
       width={236}
       src={image.url}

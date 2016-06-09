@@ -12,16 +12,21 @@ section.pin {
   transform: rotateY(0deg);
   width: 236px;
   border-radius: 6px;
-
+  overflow: hidden;
   font-family: "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", arial, sans-serif;
   color: rgb(33, 25, 34);
   font-size: 12px;
   text-align: left;
 }
 
-.canvas {
+.images {
   width: 236px;
-  overflow-x: hidden;
+  min-height: 100px;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+
+.canvas {
 }
 
 .pinMetaWrapper {

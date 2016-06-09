@@ -77,7 +77,7 @@
     "lodash.findindex": "^4.4.0",
     "lodash.remove": "^4.5.0",
     "react": "^0.14.8",
-    "react-avatar-editor": "^4.0.0",
+    "react-avatar-editor": "^3.2.1",
     "react-canvas": "^1.1.0",
     "react-dock": "^0.2.3",
     "react-dom": "^0.14.8",

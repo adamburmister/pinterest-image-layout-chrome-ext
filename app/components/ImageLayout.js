@@ -100,7 +100,8 @@ ImageLayout.propTypes = {
 ImageLayout.defaultProps = {
   columns: 4,
   columnWidth: 100,
-  gutter: 0
+  gutter: 0,
+  images: [],
 };
 
 export default ImageLayout;

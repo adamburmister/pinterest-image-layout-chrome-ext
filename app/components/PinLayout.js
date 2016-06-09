@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 // import * as ImageActions from '../actions/images';
 import ReactCanvas, { Surface, Group, Gradient, Image, Text, FontFace } from 'react-canvas';
 import style from './PinLayout.css';
+import PinLayoutImagePanel from './PinLayoutImagePanel';
 
 const DEFAULT_PIN_IMG_HEIGHT = 300
+// TODO: Export to config file import
 const PIN_WIDTH = 236
 
 @connect(
@@ -39,7 +41,12 @@ class PinLayout extends Component {
 
     return (
       <section className={style.pin}>
-        <div className={style.canvas}>
+        <div className={style.images}>
+          {selectedImages.map(img =>
+            <PinLayoutImagePanel image={img}  key={`${img.id}_resizable`} />
+          )}
+        </div>
+        <div className={style.canvas} style={{display:'none'}}>
           <Surface top={0} left={0} width={PIN_WIDTH} height={DEFAULT_PIN_IMG_HEIGHT}>
             <Gradient
               style={this.getGradientStyle()}
