@@ -23,16 +23,13 @@ export default class App extends Component {
   };
 
   render() {
-    const { images } = this.props;
-
     return (
       <div className={style.container}>
         <div className={style.imagesPanel}>
-          Images components
-          <ImageLayout items={images} columnWidth={200} columns={3} gutter={8} />
+          <ImageLayout columnWidth={236} columns={3} gutter={8} />
         </div>
         <div className={style.pinPanel}>
-          <PinLayout image={images} />
+          <PinLayout />
         </div>
       </div>
     );

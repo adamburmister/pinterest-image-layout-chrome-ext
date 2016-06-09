@@ -18,28 +18,6 @@ class PinLayout extends Component {
     images: PropTypes.array.isRequired
   };
 
-  render() {
-    const { images } = this.props;
-    return (
-      <section className={style.pin}>
-        <div className={style.canvas}>
-          <Surface top={0} left={0} width={PIN_WIDTH} height={DEFAULT_PIN_IMG_HEIGHT}>
-            <Gradient
-              style={this.getGradientStyle()}
-              colorStops={this.getGradientColors()}
-            />
-          </Surface>
-        </div>
-        <div className={style.pinMetaWrapper}>
-          <p className={style.pinDescription}>
-            Black wooden cladding - Huize Monnikenheide - 51N4E - photo by Dorothee Dubois
-          </p>
-        </div>
-      </section>
-    );
-  }
-
-
   getGradientStyle() {
     return {
       top: 0,
@@ -56,6 +34,27 @@ class PinLayout extends Component {
     ];
   }
 
+  render() {
+    const selectedImages = this.props.images.filter((img) => img.isSelected);
+
+    return (
+      <section className={style.pin}>
+        <div className={style.canvas}>
+          <Surface top={0} left={0} width={PIN_WIDTH} height={DEFAULT_PIN_IMG_HEIGHT}>
+            <Gradient
+              style={this.getGradientStyle()}
+              colorStops={this.getGradientColors()}
+            />
+          </Surface>
+        </div>
+        <div className={style.pinMetaWrapper}>
+          <p className={style.pinDescription}>
+            Blah blah blah {selectedImages.length}
+          </p>
+        </div>
+      </section>
+    );
+  }
 }
 
 export default PinLayout;

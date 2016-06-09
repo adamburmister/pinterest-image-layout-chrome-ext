@@ -1,12 +1,13 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import remove from 'lodash.remove';
+import findIndex from 'lodash.findIndex';
 
 const initialState = [];
 
 // Modify an image in the state, merging in changes
 const merge = (state, id, changes) => {
-  const target = remove(state, { id })[0];
-  return [...state, { ...target, ...changes }];
+  const idx = findIndex(state, { id });
+  const target = state.slice(idx, 1);
+  return [...state.slice(0, idx), { ...target, ...changes }, ...state.slice(idx + 1)];
 };
 
 const actionsMap = {
@@ -23,9 +24,17 @@ const actionsMap = {
     return merge(state, id, { isSelected: false });
   },
   [ActionTypes.TOGGLE_IMAGE_SELECTION](state, { id }) {
-    const target = remove(state, { id });
-    target.isSelected = (target.isSelected === 'undefined' ? true : !target.isSelected);
-    return [...state, ...target];
+    const idx = findIndex(state, { id });
+    const target = state.slice(idx, idx + 1)[0];
+    const selectedTarget = {
+      ...target,
+      isSelected: (target.isSelected === 'undefined' ? true : !target.isSelected)
+    };
+    return [
+      ...state.slice(0, idx),
+      selectedTarget,
+      ...state.slice(idx + 1)
+    ];
   }
 };
 

@@ -7,13 +7,14 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ImageActions from '../actions/images';
+import ToggleableImage from './ToggleableImage';
 
 /*
  * The classic "masonry" style Pinterest grid
  * @prop {number} columns - the number of columns in the grid
  * @prop {number} columnWidth - the fixed width of the columns
  * @prop {number} gutter  - the number of columns in the grid
- * @prop {Array}  items   - the list of items to render
+ * @prop {Array}  images   - the list of images to render
  */
 @connect(
  state => ({
@@ -28,7 +29,6 @@ class ImageLayout extends Component {
   constructor(props) {
     super(props);
     this.columnHeights = Array.from({ length: props.columns }, () => 0);
-    this.renderItem = this.renderItem.bind(this);
   }
 
     /*
@@ -40,18 +40,18 @@ class ImageLayout extends Component {
   }
 
     /*
-     * Determine the top and left positions of the grid item. Update the
+     * Determine the top and left positions of the grid image. Update the
      * cached column height.
-     * @param {Object} item - the grid item
-     * @param {Object} item.height - the grid item's image height
-     * @param {Object} item.width - the grid item's image width
+     * @param {Object} image - the grid image
+     * @param {Object} image.height - the grid image's image height
+     * @param {Object} image.width - the grid image's image width
      */
-  getItemStyle(item) {
+  getItemStyle(image) {
     const { columnWidth, gutter } = this.props;
     const shortestColumnIndex = this.getShortestColumn();
     const left = (columnWidth + gutter) * shortestColumnIndex;
     const top = this.columnHeights[shortestColumnIndex];
-    const normalizedHeight = (columnWidth / item.width) * item.height;
+    const normalizedHeight = (columnWidth / image.width) * image.height;
     this.columnHeights[shortestColumnIndex] += normalizedHeight + gutter;
     return {
       left: `${left}px`,
@@ -60,32 +60,19 @@ class ImageLayout extends Component {
     };
   }
 
-    /*
-     * Render helper for an individual grid item
-     * @param {Object} item - the grid item to render
-     * @param {Object} item.url - the image src url
-     */
-  renderItem(item, index) {
-    return (
-      <img
-        className="ImageLayout__item"
-        src={item.url}
-        width={this.props.columnWidth}
-        style={this.getItemStyle(item)}
-        alt={item.isSelected.toString()}
-        onClick={() => {
-          this.props.actions.toggleImageSelection(item.id);
-        }}
-        key={index}
-      />
-    );
-  }
-
   render() {
-    const { items } = this.props;
+    const { images } = this.props;
     return (
       <div className="ImageLayout" style={{ position: 'relative' }}>
-        {items.map(this.renderItem)}
+        {images.map(image => (
+          <div style={this.getItemStyle(image)}>
+            <ToggleableImage
+              key={image.id}
+              image={image}
+              onClick={() => this.props.actions.toggleImageSelection(image.id)}
+            />
+          </div>
+        ))}
       </div>
     );
   }
@@ -99,13 +86,7 @@ ImageLayout.propTypes = {
     // The size of the gutter between images
   gutter: PropTypes.number,
     // The list of images to render
-  items: PropTypes.arrayOf(
-        PropTypes.shape({
-          height: PropTypes.number.isRequired,
-          url: PropTypes.string.isRequired,
-          width: PropTypes.number.isRequired
-        })
-    ).isRequired,
+  images: PropTypes.array.isRequired,
   actions: PropTypes.object
 };
 
