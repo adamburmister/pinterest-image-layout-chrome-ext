@@ -6,6 +6,9 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   module: {
-    loaders: config.module.loaders.slice(1)  // remove babel-loader
+    loaders: config.module.loaders.slice(1),  // remove babel-loader
+    postLoaders: [
+      { loader: 'transform?brfs' }
+    ],
   }
 };
