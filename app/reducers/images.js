@@ -21,6 +21,11 @@ const actionsMap = {
   },
   [ActionTypes.DESELECT_IMAGE](state, { id }) {
     return merge(state, id, { isSelected: false });
+  },
+  [ActionTypes.TOGGLE_IMAGE_SELECTION](state, { id }) {
+    const target = remove(state, { id });
+    target.isSelected = (target.isSelected === 'undefined' ? true : !target.isSelected);
+    return [...state, ...target];
   }
 };
 
