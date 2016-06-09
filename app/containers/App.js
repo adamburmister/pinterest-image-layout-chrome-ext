@@ -30,7 +30,7 @@ export default class App extends Component {
         <div className={style.imagesPanel}>
           Images components
 
-          <ImageLayout items={ images } columnWidth={200} columns={3} gutter={8} />
+          <ImageLayout items={images} columnWidth={200} columns={3} gutter={8} />
 
         </div>
         <div className={style.pinPanel}>
