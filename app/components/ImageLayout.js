@@ -29,9 +29,8 @@ class ImageLayout extends Component {
 
   constructor(props) {
     super(props);
-    // ADD GET COLUMN COUNT
+    // This column count may not ever be used for display
     this.columnHeights = Array.from({ length: props.columns }, () => 0);
-    this.renderItem = this.renderItem.bind(this);
   }
 
     /*
