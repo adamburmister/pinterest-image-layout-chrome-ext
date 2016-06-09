@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ImageActions from '../actions/images';
 import ToggleableImage from './ToggleableImage';
+import ReactDOM from 'react-dom';
 
 /*
  * The classic "masonry" style Pinterest grid
@@ -28,6 +29,7 @@ class ImageLayout extends Component {
 
   constructor(props) {
     super(props);
+    // This column count may not ever be used for display
     this.columnHeights = Array.from({ length: props.columns }, () => 0);
   }
 
@@ -35,8 +37,22 @@ class ImageLayout extends Component {
      * Reset column heights to zero on update
      */
   componentWillUpdate(props) {
-    this.columnHeights = Array.from({ length: props.columns }, () => 0);
+    const columnCount = this.getColumnCount(props);
+    this.columnHeights = Array.from({ length: columnCount }, () => 0);
   }
+
+    /**
+     * Look at the root node and/or its parent, and determine
+     * how many columns we can fit.
+     * @returns {number} the number of columns to use
+     */
+    getColumnCount(props) {
+        const rootNode = ReactDOM.findDOMNode(this.refs.root);
+        const grandWidth = rootNode.parentNode.parentNode.offsetWidth;
+        const columnCount = Math.floor((grandWidth - 345) / (props.columnWidth + props.gutter));
+        return columnCount;
+
+    }
 
     /*
      * Get the shortest column in the list of columns heights
@@ -70,7 +86,7 @@ class ImageLayout extends Component {
   render() {
     const { images } = this.props;
     return (
-      <div className="ImageLayout" style={{ position: 'relative' }}>
+      <div className="ImageLayout" style={{ position: 'relative' }} ref="root">
         {images.map(image => (
           <div style={this.getItemStyle(image)}>
             <ToggleableImage
