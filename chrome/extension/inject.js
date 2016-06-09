@@ -6,6 +6,9 @@ import createStore from '../../app/store/configureStore';
 import { replaceImages } from '../../app/actions/images';
 import uuid from 'uuid';
 
+// TODO: Export to config file import
+const PIN_WIDTH = 236;
+
 let handleExtensionClick = () => {};
 
 class InjectApp extends Component {
@@ -21,13 +24,15 @@ class InjectApp extends Component {
   populateImagesIntoStore = () => {
     const images = [];
     document.querySelectorAll('img').forEach((img) => {
-      images.push({
-        id: uuid.v1(),
-        url: img.src,
-        width: img.width,
-        height: img.height,
-        isSelected: false,
-      });
+      if (img.width > PIN_WIDTH && img.src.substring(0, 5) !== 'data:') {
+        images.push({
+          id: uuid.v1(),
+          url: img.src,
+          width: img.width,
+          height: img.height,
+          isSelected: false,
+        });
+      }
     });
     if (images.length) {
       images[0].isSelected = true;

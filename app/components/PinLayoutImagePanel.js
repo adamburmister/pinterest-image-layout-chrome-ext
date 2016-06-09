@@ -5,7 +5,7 @@ import AvatarEditor from 'react-avatar-editor';
 import style from './PinLayoutImagePanel.css';
 
 // TODO: Export to config file import
-const PIN_WIDTH = 236
+const PIN_WIDTH = 236;
 const MIN_PIN_HEIGHT = 100;
 const MAX_PIN_HEIGHT = 1680 / 2;
 const MIN_ZOOM = 0.2;
@@ -30,13 +30,13 @@ class PinLayoutImagePanel extends Component {
 
   handleZoomUpdate(evt) {
     const newstate = this.state;
-    newstate.zoom = ReactDom.findDOMNode(this.refs.zoom).value;
+    newstate.zoom = +ReactDom.findDOMNode(this.refs.zoom).value;
     this.setState({ newstate });
   }
 
   render() {
     const { image } = this.props;
-    const { height, zoom } = this.state;
+    const { height, zoom, width } = this.state;
     return (
       <div className={style.PinLayoutImagePanel}>
         <input
@@ -62,7 +62,7 @@ class PinLayoutImagePanel extends Component {
             image={image.url}
             scale={zoom}
             border={0}
-            width={PIN_WIDTH}
+            width={width}
             height={height}
           />
         </ResizableBox>

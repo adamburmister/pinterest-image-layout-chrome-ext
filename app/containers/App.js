@@ -31,6 +31,9 @@ export default class App extends Component {
         </div>
         <div className={style.pinPanel}>
           <PinLayout />
+          <div className={style.pinPanelFooter}>
+            <button className={style.btnSave} onClick={this.handleSave}>Save</button>
+          </div>
         </div>
       </div>
     );

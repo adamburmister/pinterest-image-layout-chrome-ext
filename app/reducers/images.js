@@ -10,14 +10,14 @@ const merge = (state, id, changes) => {
   return [...state.slice(0, idx), { ...target, ...changes }, ...state.slice(idx + 1)];
 };
 
-const hasSelectedImages = (images) => images.filter(img => img.isSelected).length
+const countSelectedImages = (images) => images.filter(img => img.isSelected).length
 
 const actionsMap = {
   [ActionTypes.ADD_IMAGE](state, { image }) {
     return [...state, image];
   },
   [ActionTypes.REPLACE_IMAGES](state, { images }) {
-    if (images.length && !hasSelectedImages(images)) {
+    if (images.length && countSelectedImages(images) === 0) {
       images[0].isSelected = true;
     }
     return [...images];
@@ -35,11 +35,16 @@ const actionsMap = {
       ...target,
       isSelected: (target.isSelected === 'undefined' ? true : !target.isSelected)
     };
-    return [
+    const newState = [
       ...state.slice(0, idx),
       selectedTarget,
       ...state.slice(idx + 1)
     ];
+    // You always need at least one selected
+    if (countSelectedImages(newState) === 0) {
+      return state;
+    }
+    return newState;
   }
 };
 
