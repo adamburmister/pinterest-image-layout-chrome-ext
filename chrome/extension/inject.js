@@ -29,6 +29,9 @@ class InjectApp extends Component {
         isSelected: false,
       });
     });
+    if (images.length) {
+      images[0].isSelected = true;
+    }
     this.store.dispatch(replaceImages(images));
   }
 

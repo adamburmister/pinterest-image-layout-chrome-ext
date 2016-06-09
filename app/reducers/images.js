@@ -10,12 +10,17 @@ const merge = (state, id, changes) => {
   return [...state.slice(0, idx), { ...target, ...changes }, ...state.slice(idx + 1)];
 };
 
+const hasSelectedImages = (images) => images.filter(img => img.isSelected).length
+
 const actionsMap = {
   [ActionTypes.ADD_IMAGE](state, { image }) {
     return [...state, image];
   },
   [ActionTypes.REPLACE_IMAGES](state, { images }) {
-    return images;
+    if (images.length && !hasSelectedImages(images)) {
+      images[0].isSelected = true;
+    }
+    return [...images];
   },
   [ActionTypes.SELECT_IMAGE](state, { id }) {
     return merge(state, id, { isSelected: true });
