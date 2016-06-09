@@ -26,6 +26,7 @@ class InjectApp extends Component {
         url: img.src,
         width: img.width,
         height: img.height,
+        isSelected: false,
       });
     });
     this.store.dispatch(replaceImages(images));

@@ -17,10 +17,10 @@ const actionsMap = {
     return images;
   },
   [ActionTypes.SELECT_IMAGE](state, { id }) {
-    return merge(state, id, { isSelected: true })
+    return merge(state, id, { isSelected: true });
   },
   [ActionTypes.DESELECT_IMAGE](state, { id }) {
-    return merge(state, id, { isSelected: false })
+    return merge(state, id, { isSelected: false });
   }
 };
 

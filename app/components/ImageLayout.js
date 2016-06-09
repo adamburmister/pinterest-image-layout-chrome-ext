@@ -61,6 +61,8 @@ export default class ImageLayout extends React.Component {
                 src={item.url}
                 width={this.props.columnWidth}
                 style={this.getItemStyle(item)}
+                alt={item.isSelected.toString()}
+                onClick={function () {console.log(index);} }
                 key={index} />
         );
     }
