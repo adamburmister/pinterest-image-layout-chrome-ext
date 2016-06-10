@@ -30,52 +30,74 @@ class ImageLayout extends Component {
   constructor(props) {
     super(props);
     // This column count may not ever be used for display
-    this.columnHeights = Array.from({ length: props.columns }, () => 0);
+    this.state = {columnHeights: Array.from({ length: props.columns }, () => 0)};
+    this.handleResize = this.handleResize.bind(this);
   }
 
-    /*
-     * Reset column heights to zero on update
-     */
+  /*
+   * Check if state has been updated, if this returns false
+   * componentWillUpdate does not get used
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    const newImages = nextProps.images !== this.props.images;
+    const newColumns = this.getColumnCount(nextProps) !== this.state.columnHeights.length;
+    return newImages || newColumns;
+  }
+
+  /*
+   * Reset column count and height on update
+   */
   componentWillUpdate(props) {
+    this.updateColumnCount(props);
+  }
+
+  updateColumnCount(props) {
     const columnCount = this.getColumnCount(props);
-    this.columnHeights = Array.from({ length: columnCount }, () => 0);
+    this.setState( {columnHeights: Array.from({ length: columnCount }, () => 0)} )
   }
 
-    /**
-     * Look at the root node and/or its parent, and determine
-     * how many columns we can fit.
-     * @returns {number} the number of columns to use
-     */
-    getColumnCount(props) {
-        const rootNode = ReactDOM.findDOMNode(this.refs.root);
-        const grandWidth = rootNode.parentNode.parentNode.offsetWidth;
-        const columnCount = Math.floor((grandWidth - 345) / (props.columnWidth + props.gutter));
-        return columnCount;
+  /**
+   * Look at the root node and/or its parent, and determine
+   * how many columns we can fit.
+   * @returns {number} the number of columns to use
+   */
+  getColumnCount(props) {
+    const rootNode = ReactDOM.findDOMNode(this.refs.root);
+    const grandWidth = rootNode.parentNode.parentNode.offsetWidth;
+    const columnCount = Math.floor((grandWidth) / (props.columnWidth + props.gutter));
+    return columnCount;
+  }
 
-    }
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
 
-    /*
-     * Get the shortest column in the list of columns heights
-     */
+  handleResize(evt) {
+    this.updateColumnCount(this.props);
+  }
+
+  /*
+   * Get the shortest column in the list of columns heights
+   */
   getShortestColumn() {
-    const minValue = Math.min(...this.columnHeights);
-    return this.columnHeights.indexOf(minValue);
+  const minValue = Math.min(...this.state.columnHeights);
+  return this.state.columnHeights.indexOf(minValue);
   }
 
-    /*
-     * Determine the top and left positions of the grid image. Update the
-     * cached column height.
-     * @param {Object} image - the grid image
-     * @param {Object} image.height - the grid image's image height
-     * @param {Object} image.width - the grid image's image width
-     */
+  /*
+   * Determine the top and left positions of the grid image. Update the
+   * cached column height.
+   * @param {Object} image - the grid image
+   * @param {Object} image.height - the grid image's image height
+   * @param {Object} image.width - the grid image's image width
+   */
   getItemStyle(image) {
     const { columnWidth, gutter } = this.props;
     const shortestColumnIndex = this.getShortestColumn();
     const left = (columnWidth + gutter) * shortestColumnIndex;
-    const top = this.columnHeights[shortestColumnIndex];
+    const top = this.state.columnHeights[shortestColumnIndex];
     const normalizedHeight = (columnWidth / image.width) * image.height;
-    this.columnHeights[shortestColumnIndex] += normalizedHeight + gutter;
+    this.state.columnHeights[shortestColumnIndex] += normalizedHeight + gutter;
     return {
       left: `${left}px`,
       top: `${top}px`,
@@ -84,31 +106,31 @@ class ImageLayout extends Component {
   }
 
   render() {
-    const { images } = this.props;
-    return (
-      <div className="ImageLayout" style={{ position: 'relative' }} ref="root">
-        {images.map(image => (
-          <div style={this.getItemStyle(image)}>
-            <ToggleableImage
-              key={image.id}
-              image={image}
-              onClick={() => this.props.actions.toggleImageSelection(image.id)}
-            />
-          </div>
-        ))}
+  const { images } = this.props;
+  return (
+    <div className="ImageLayout" style={{ position: 'relative' }} ref="root">
+    {images.map(image => (
+      <div style={this.getItemStyle(image)}>
+      <ToggleableImage
+        key={image.id}
+        image={image}
+        onClick={() => this.props.actions.toggleImageSelection(image.id)}
+      />
       </div>
-    );
+    ))}
+    </div>
+  );
   }
 }
 
 ImageLayout.propTypes = {
-    // The number of columns in the grid
+  // The number of columns in the grid
   columns: PropTypes.number,
-    // The fixed width of the columns in the grid
+  // The fixed width of the columns in the grid
   columnWidth: PropTypes.number,
-    // The size of the gutter between images
+  // The size of the gutter between images
   gutter: PropTypes.number,
-    // The list of images to render
+  // The list of images to render
   images: PropTypes.array.isRequired,
   actions: PropTypes.object
 };
