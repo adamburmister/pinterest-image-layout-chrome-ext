@@ -19,7 +19,7 @@ import ReactDOM from 'react-dom';
  */
 @connect(
  state => ({
-   images: state.images
+   images: state.images,
  }),
  dispatch => ({
    actions: bindActionCreators(ImageActions, dispatch)
@@ -30,7 +30,7 @@ class ImageLayout extends Component {
   constructor(props) {
     super(props);
     // This column count may not ever be used for display
-    this.state = {columnHeights: Array.from({ length: props.columns }, () => 0)};
+    this.state = { columnHeights: Array.from({ length: props.columns }, () => 0) };
     this.handleResize = this.handleResize.bind(this);
   }
 
@@ -53,7 +53,7 @@ class ImageLayout extends Component {
 
   updateColumnCount(props) {
     const columnCount = this.getColumnCount(props);
-    this.setState( {columnHeights: Array.from({ length: columnCount }, () => 0)} )
+    this.setState({ columnHeights: Array.from({ length: columnCount }, () => 0) });
   }
 
   /**
@@ -80,8 +80,8 @@ class ImageLayout extends Component {
    * Get the shortest column in the list of columns heights
    */
   getShortestColumn() {
-  const minValue = Math.min(...this.state.columnHeights);
-  return this.state.columnHeights.indexOf(minValue);
+    const minValue = Math.min(...this.state.columnHeights);
+    return this.state.columnHeights.indexOf(minValue);
   }
 
   /*
@@ -106,20 +106,19 @@ class ImageLayout extends Component {
   }
 
   render() {
-  const { images } = this.props;
-  return (
-    <div className="ImageLayout" style={{ position: 'relative' }} ref="root">
-    {images.map(image => (
-      <div style={this.getItemStyle(image)}>
-      <ToggleableImage
-        key={image.id}
-        image={image}
-        onClick={() => this.props.actions.toggleImageSelection(image.id)}
-      />
+    const { images } = this.props;
+    return (
+      <div className="ImageLayout" style={{ position: 'relative' }} ref="root">
+      {images.map(image => (
+        <div style={this.getItemStyle(image)}>
+          <ToggleableImage
+            key={image.id}
+            image={image}
+          />
+        </div>
+      ))}
       </div>
-    ))}
-    </div>
-  );
+    );
   }
 }
 

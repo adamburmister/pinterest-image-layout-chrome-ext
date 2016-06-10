@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import * as ImageActions from '../actions/images';
-import ReactCanvas, { Surface, Group, Gradient, Image, Text, FontFace } from 'react-canvas';
+// import ReactCanvas, { Surface, Group, Gradient, Image, Text, FontFace } from 'react-canvas';
 import style from './PinLayout.css';
 import PinLayoutImagePanel from './PinLayoutImagePanel';
 
@@ -12,12 +12,12 @@ const PIN_WIDTH = 236
 
 @connect(
   state => ({
-    images: state.images
+    canvasImages: state.canvas
   })
 )
 class PinLayout extends Component {
   static propTypes = {
-    images: PropTypes.array.isRequired
+    canvasImages: PropTypes.array.isRequired
   };
 
   getGradientStyle() {
@@ -37,23 +37,25 @@ class PinLayout extends Component {
   }
 
   render() {
-    const selectedImages = this.props.images.filter((img) => img.isSelected);
-
+    const { canvasImages } = this.props;
     return (
       <section className={style.pin}>
         <div className={style.images}>
-          {selectedImages.map(img =>
-            <PinLayoutImagePanel image={img}  key={`${img.id}_resizable`} />
+          {canvasImages.map(image =>
+            <PinLayoutImagePanel
+              key={`${image.id}_resizable`}
+              image={image}
+            />
           )}
         </div>
-        <div className={style.canvas} style={{display:'none'}}>
+        {/*<div className={style.canvas} style={{display:'none'}}>
           <Surface top={0} left={0} width={PIN_WIDTH} height={DEFAULT_PIN_IMG_HEIGHT}>
             <Gradient
               style={this.getGradientStyle()}
               colorStops={this.getGradientColors()}
             />
           </Surface>
-        </div>
+        </div>*/}
         <div className={style.pinMetaWrapper}>
           <textarea
             type="text"
@@ -66,5 +68,9 @@ class PinLayout extends Component {
     );
   }
 }
+
+PinLayout.contextTypes = {
+  store: PropTypes.object
+};
 
 export default PinLayout;

@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PinLayout from '../components/PinLayout';
-// import MainSection from '../components/MainSection';
 import * as ImageActions from '../actions/images';
 import style from './App.css';
 import ImageLayout from '../components/ImageLayout';
@@ -49,3 +48,7 @@ export default class App extends Component {
     );
   }
 }
+
+App.contextTypes = {
+  store: PropTypes.object
+};

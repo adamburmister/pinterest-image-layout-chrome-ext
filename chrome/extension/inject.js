@@ -4,6 +4,7 @@ import Dock from 'react-dock';
 import Root from '../../app/containers/Root';
 import createStore from '../../app/store/configureStore';
 import { replaceImages } from '../../app/actions/images';
+import { addImage } from '../../app/actions/canvas';
 import uuid from 'uuid';
 
 // TODO: Export to config file import
@@ -38,7 +39,9 @@ class InjectApp extends Component {
       }
     });
     if (images.length) {
-      images[0].isSelected = true;
+      const image = images[0];
+      image.isSelected = true;
+      this.store.dispatch(addImage(image));
     }
     this.store.dispatch(replaceImages(images));
   }
