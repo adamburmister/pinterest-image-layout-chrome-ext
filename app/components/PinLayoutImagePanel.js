@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom';
 import ResizableBox from './ResizableBox';
 import AvatarEditor from 'react-avatar-editor';
+import throttle from 'lodash.throttle';
 import style from './PinLayoutImagePanel.css';
 
 // TODO: Export to config file import
@@ -15,16 +16,17 @@ const DEFAULT_ZOOM = 1;
 class PinLayoutImagePanel extends Component {
   constructor(props) {
     super(props);
-    this.handleResizableBoxResize = this.handleResizableBoxResize.bind(this);
+    this.handleResizableBoxResize = throttle(this.handleResizableBoxResize.bind(this), 50);
     this.handleZoomUpdate = this.handleZoomUpdate.bind(this);
     this.state = {
-      height: props.image.height,
+      height: props.image.height * DEFAULT_ZOOM,
       width: PIN_WIDTH,
       zoom: DEFAULT_ZOOM,
     };
   }
 
   handleResizableBoxResize(evt, { size }) {
+    console.log(size.height);
     this.setState({ height: size.height });
   }
 
@@ -56,13 +58,13 @@ class PinLayoutImagePanel extends Component {
           height={height}
           minConstraints={[PIN_WIDTH, MIN_PIN_HEIGHT]}
           maxConstraints={[PIN_WIDTH, MAX_PIN_HEIGHT]}
-          handleResizableBoxResize={this.handleResizableBoxResize}
+          onResize={this.handleResizableBoxResize}
         >
           <AvatarEditor
             image={image.url}
             scale={zoom}
             border={0}
-            width={width}
+            width={PIN_WIDTH}
             height={height}
           />
         </ResizableBox>
