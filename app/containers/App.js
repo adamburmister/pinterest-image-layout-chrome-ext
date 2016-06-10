@@ -23,13 +23,17 @@ export default class App extends Component {
     actions: PropTypes.object.isRequired
   };
 
+  handleSave() {
+    alert('If only we had enough time! So close.');
+  }
+
   render() {
     return (
       <div className={style.container}>
         <div className={style.imagesPanel}>
           <div className={style.logoHeader}>
             <img src={chrome.extension.getURL('img/P_ChoosePins.png')}
-            className={style.headerImage}/>          
+            className={style.headerImage}/>
           </div>
           <div className={style.scrollPanel}>
             <ImageLayout columnWidth={236} columns={1} gutter={8} />
