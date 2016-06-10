@@ -34,10 +34,15 @@ section.pin {
 }
 
 .pinDescription {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #333;
-    font-size: 13px;
-    line-height: 17px;
-    word-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  font-size: 13px;
+  line-height: 17px;
+  word-wrap: break-word;
+  border: 0;
+  padding: 5px;
+  width: 100%;
+  outline: none;
+  resize: vertical;
 }

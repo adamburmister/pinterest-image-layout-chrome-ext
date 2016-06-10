@@ -8,6 +8,7 @@ import uuid from 'uuid';
 
 // TODO: Export to config file import
 const PIN_WIDTH = 236;
+const MIN_PIN_HEIGHT = 200;
 
 let handleExtensionClick = () => {};
 
@@ -24,7 +25,9 @@ class InjectApp extends Component {
   populateImagesIntoStore = () => {
     const images = [];
     document.querySelectorAll('img').forEach((img) => {
-      if (img.width > PIN_WIDTH && img.src.substring(0, 5) !== 'data:') {
+      if (img.width > PIN_WIDTH && /* min width */
+        img.height > MIN_PIN_HEIGHT && /* min height */
+        img.src.substring(0, 5) !== 'data:' /* not B64 */) {
         images.push({
           id: uuid.v1(),
           url: img.src,

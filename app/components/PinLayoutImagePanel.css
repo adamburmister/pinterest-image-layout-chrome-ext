@@ -2,7 +2,7 @@
   position: relative;
 }
 
-.zoom {
+input[type=range].zoom {
   display: none;
   position: absolute;
   top: 5px;

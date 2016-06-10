@@ -55,9 +55,12 @@ class PinLayout extends Component {
           </Surface>
         </div>
         <div className={style.pinMetaWrapper}>
-          <p className={style.pinDescription}>
-            Blah blah blah {selectedImages.length}
-          </p>
+          <textarea
+            type="text"
+            rows="2"
+            className={style.pinDescription}
+            placeholder="Describe your Pin"
+          />
         </div>
       </section>
     );
