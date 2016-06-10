@@ -50,6 +50,18 @@
   z-index: 200;
 }
 
+.logoHeader {
+  height: 80px;
+  text-align: left;
+/*  right: 0;
+  top: 0;
+  position: absolute;*/
+}
+
+.headerImage{
+  height: 70px;
+}
+
 .imagesPanel {
   margin-right: 400px;
 }

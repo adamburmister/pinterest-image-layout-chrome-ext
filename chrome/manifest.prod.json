@@ -8,12 +8,13 @@
     "default_popup": "popup.html"
   },
   "icons": {
-    "16": "img/icon-16.png",
-    "48": "img/icon-48.png",
-    "128": "img/icon-128.png"
+    "16": "img/Pin_Layout_16.png",
+    "48": "img/Pin_Layout_48.png",
+    "128": "img/Pin_Layout_128.png"
   },
   "web_accessible_resources": [
-    "inject.html"
+    "inject.html",
+    "img/P_ChoosePins.png"
   ],
   "background": {
     "page": "background.html"
