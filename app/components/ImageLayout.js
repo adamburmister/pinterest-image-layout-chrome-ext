@@ -64,7 +64,7 @@ class ImageLayout extends Component {
   getColumnCount(props) {
     const rootNode = ReactDOM.findDOMNode(this.refs.root);
     const grandWidth = rootNode.parentNode.parentNode.offsetWidth;
-    const columnCount = Math.floor((grandWidth - 400) / (props.columnWidth + props.gutter));
+    const columnCount = Math.floor((grandWidth) / (props.columnWidth + props.gutter));
     return columnCount;
   }
 

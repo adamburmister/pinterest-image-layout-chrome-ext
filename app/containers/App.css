@@ -53,17 +53,26 @@
 .logoHeader {
   height: 80px;
   text-align: left;
-/*  right: 0;
+  left: 0;
   top: 0;
-  position: absolute;*/
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .headerImage{
   height: 70px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .imagesPanel {
   margin-right: 400px;
+}
+
+.scrollPanel {
+  margin-top: 80px;
 }
 
 .pinPanelFooter {

@@ -31,7 +31,9 @@ export default class App extends Component {
             <img src={chrome.extension.getURL('img/P_ChoosePins.png')}
             className={style.headerImage}/>          
           </div>
-          <ImageLayout columnWidth={236} columns={1} gutter={8} />
+          <div className={style.scrollPanel}>
+            <ImageLayout columnWidth={236} columns={1} gutter={8} />
+          </div>
         </div>
         <div className={style.pinPanel}>
           <PinLayout />
